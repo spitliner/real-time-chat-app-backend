@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {Snowflake} from 'snowflake';
+import { Snowflake } from 'snowflake';
 import messageSchema from '../schema/message-schema.js';
 
 const messageMongoModel = mongoose.model('Message', messageSchema, 'Messages');
@@ -20,6 +20,12 @@ const messageModel = {
     async getMessage(messageId: string, messageChannel: string) {
         return messageMongoModel.findOne({
             id: messageId,
+            channelId: messageChannel,
+        }, '-_id -__v').lean().exec();
+    },
+
+    async getChannelMessage(messageChannel: string) {
+        return messageMongoModel.find({
             channelId: messageChannel,
         }, '-_id -__v').lean().exec();
     },

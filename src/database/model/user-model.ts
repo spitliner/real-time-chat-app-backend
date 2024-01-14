@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import {customAlphabet} from 'nanoid';
+import { customAlphabet } from 'nanoid';
 import typia from 'typia';
 import userSchema from '../schema/user-schema.js';
-import {type Friends, type UserSettings} from '../../type/user-type.js';
+import { type Friends, type UserSettings } from '../../type/user-type.js';
 
 const userMongoModel = mongoose.model('User', userSchema, 'Users');
 

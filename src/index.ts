@@ -1,37 +1,10 @@
-/* eslint-disable new-cap */
 import process from 'node:process';
-import cors from 'cors';
 import dotenv from 'dotenv';
-import express from 'express';
 import mongoose from 'mongoose';
-import * as socketIO from 'socket.io';
-import * as uWebSockets from 'uWebSockets.js';
-import authRouter from './router/auth-router.js';
-import chatListener from './socket/socket-chat.js';
-import { type ClientToServerEvents, type InterServerEvents, type ServerToClientEvents, type SocketData } from './socket/socket-interface.js';
-import { type SocketType } from './type/socket-type.js';
+import uWebSocketsApp from './socket/socket';
+import expressServer from './router/express-setup';
 
 dotenv.config();
-
-//------
-
-const expressServer = express();
-expressServer.use(cors({
-    origin: [
-        `http://localhost:${process.env.AUTH_SERVER_PORT}`,
-        `http://localhost:${process.env.SOCKET_SERVER_PORT}`,
-    ],
-    credentials: true,
-}));
-expressServer.use(express.json());
-expressServer.use(express.urlencoded({extended: true}));
-
-//------
-
-expressServer.use('/api', authRouter);
-expressServer.get('*', (request, response) => response.status(404).json({error: 'unknown request'}));
-
-//------
 
 mongoose.connection.on('open', () => {
     // console.log(ref);
@@ -58,17 +31,6 @@ expressServer.listen(portNumber, () => {
 });
 
 //------
-
-const uWebSocketsApp = uWebSockets.App();
-const io = new socketIO.Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>();
-
-io.attachApp(uWebSocketsApp);
-
-const onConnection = (socket: SocketType) => {
-    chatListener(io, socket);
-};
-
-io.on('connection', onConnection);
 
 uWebSocketsApp.listen(4000, token => {
     if (!token) {

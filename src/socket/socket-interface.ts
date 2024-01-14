@@ -1,4 +1,4 @@
-import {type IncomingMessageType, type OutcomingMessageType} from '../type/message-type.js';
+import { type IncomingMessageType, type OutcomingMessageType } from '../type/message-type.js';
 
 export type ServerToClientEvents = {
     chatSync: (message: OutcomingMessageType) => void;

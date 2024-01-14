@@ -45,7 +45,8 @@
       "yoda": "off",
       "no-constant-binary-expression": 2,
       "object-curly-spacing": "off",
-      "@typescript-eslint/object-curly-spacing": "off"
+      "@typescript-eslint/object-curly-spacing": "off",
+      "import/extensions": 0
     },
     "ignores": [
       "dist"

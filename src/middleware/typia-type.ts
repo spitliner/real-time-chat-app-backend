@@ -1,5 +1,5 @@
 import typia from 'typia';
-import {type UserSettings} from '../type/user-type.js';
+import { type UserSettings } from '../type/user-type.js';
 
 export const isString = typia.createEquals<string>();
 
