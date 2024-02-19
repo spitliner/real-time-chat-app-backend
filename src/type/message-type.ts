@@ -1,8 +1,15 @@
 export type IncomingMessageType = {
     mention: string[];
     attachment: Uint8Array[];
-    content: string | undefined;
-    reply: string | undefined;
+    content?: string;
+    reply?: string;
+};
+
+export type IncomingEditMessageType = {
+    editedMention?: string[];
+    newAttachment?: Uint8Array[];
+    oldAttachmentRemove?: string[];
+    editedContent: string | undefined;
 };
 
 export type OutcomingMessageType = {

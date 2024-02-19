@@ -6,7 +6,11 @@ import chatListener from './socket-chat';
 import { type ClientToServerEvents, type ServerToClientEvents, type InterServerEvents, type SocketData } from './socket-interface';
 
 const uWebSocketsApp = uWebSockets.App();
-const io = new socketIO.Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>();
+const io = new socketIO.Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>({
+    cors: {
+        origin: '*',
+    },
+});
 
 io.attachApp(uWebSocketsApp);
 

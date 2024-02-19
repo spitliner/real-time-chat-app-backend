@@ -1,5 +1,5 @@
 import express from 'express';
-import { isString } from '../middleware/typia-type';
+import { isString } from '../middleware/typia-middleware';
 
 const authRouter = express.Router(); // eslint-disable-line new-cap
 

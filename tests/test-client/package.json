@@ -1,0 +1,17 @@
+{
+  "name": "test-client",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1",
+    "nodemon": "^3.0.3",
+    "socket.io": "^4.7.4"
+  }
+}

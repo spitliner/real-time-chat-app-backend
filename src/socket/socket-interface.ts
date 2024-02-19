@@ -19,14 +19,14 @@ export type ServerToClientEvents = {
 };
 
 export type ClientToServerEvents = {
-    chatNew: (channelID: string, message: IncomingMessageType) => void;
-    chatEdit: (channelID: string, messageID: string, content: string) => void;
-    chatTyping: (channelID: string) => void;
-    joinChannel: (groupID: string, channelID: string) => void;
-    getMessage: (messageIds: string []) => void;
-    modAction: (groupID: string, channelID: string, messageID: string) => void;
-    adminAction: (groupID: string, channelID: string, messageID: string) => void;
-    userTyping: (channelID: string, userID: string) => void;
+    chatNew: (channelID: unknown, message: unknown) => void;
+    chatEdit: (channelID: unknown, messageID: unknown, editedContent: unknown) => void;
+    chatTyping: (channelID: unknown) => void;
+    joinChannel: (groupID: unknown, channelID: unknown) => void;
+    getMessage: (messageIds: unknown) => void;
+    modAction: (groupID: unknown, channelID: unknown, messageID: unknown) => void;
+    adminAction: (groupID: unknown, channelID: unknown, messageID: unknown) => void;
+    userTyping: (channelID: unknown, userID: unknown) => void;
 };
 
 export type InterServerEvents = {
