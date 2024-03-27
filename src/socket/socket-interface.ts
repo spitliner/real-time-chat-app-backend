@@ -21,6 +21,7 @@ export type ServerToClientEvents = {
 export type ClientToServerEvents = {
     chatNew: (channelID: unknown, message: unknown) => void;
     chatEdit: (channelID: unknown, messageID: unknown, editedContent: unknown) => void;
+    chatRemove: (channelID: unknown, message: unknown) => void;
     chatTyping: (channelID: unknown) => void;
     joinChannel: (groupID: unknown, channelID: unknown) => void;
     getMessage: (messageIds: unknown) => void;

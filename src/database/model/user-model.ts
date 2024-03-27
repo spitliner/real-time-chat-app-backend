@@ -1,13 +1,9 @@
 import mongoose from 'mongoose';
-import { customAlphabet } from 'nanoid';
 import typia from 'typia';
 import userSchema from '../schema/user-schema.js';
 import { type Friends, type UserSettings } from '../../type/user-type.js';
 
-const userMongoModel = mongoose.model('User', userSchema, 'Users');
-
-const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-const uidGen = customAlphabet(alphabet, 12);
+const userMongoModel = mongoose.model('User', userSchema, 'UsersData');
 
 async function getUserMongo(userId: string, readOnly?: boolean) {
     const query = userMongoModel.findOne({
@@ -25,33 +21,10 @@ const defaultUserSetting: UserSettings = {
 };
 
 const userModel = {
-    async createUser(email: string, username: string, password: string) {
-        try {
-            const settings: UserSettings = defaultUserSetting;
-            const result = await userMongoModel.create({
-                id: uidGen(),
-                username,
-                password,
-                email,
-                settings: typia.json.stringify<UserSettings>(settings),
-            });
-
-            console.log('Insert new user with id ' + String(result.id));
-            return {
-                result: String(result.id),
-            };
-        } catch (error) {
-            console.log(error);
-            return {
-                error: 'database error',
-            };
-        }
-    },
-
-    async getUserByEmail(userEmail: string) {
+    async getUser(userId: string) {
         try {
             const query = userMongoModel.findOne({
-                email: userEmail,
+                id: userId,
             }, '-_id -__v');
 
             return {
@@ -65,11 +38,11 @@ const userModel = {
         }
     },
 
-    async getUser(userId: string) {
+    async getUserData(userId: string) {
         try {
             const query = userMongoModel.findOne({
                 id: userId,
-            }, '-_id -__v');
+            }, 'id username password');
 
             return {
                 result: await query.lean().exec(),
@@ -100,12 +73,6 @@ const userModel = {
     async checkId(userId: string) {
         return 0 === await userMongoModel.countDocuments({
             id: userId,
-        }).lean().exec();
-    },
-
-    async checkEmail(email: string) {
-        return 0 === await userMongoModel.countDocuments({
-            email,
         }).lean().exec();
     },
 

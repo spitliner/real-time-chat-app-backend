@@ -2,7 +2,6 @@ import process from 'node:process';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import uWebSocketsApp from './socket/socket';
-import expressServer from './router/express-setup';
 
 dotenv.config();
 
@@ -19,15 +18,7 @@ const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@d
 
 void mongoose.connect(uri, {dbName: process.env.DB_NAME});
 
-//------
-
-const portNumber: number = (Number(process.env.AUTH_SERVER_PORT) || 3000);
-
-expressServer.listen(portNumber, () => {
-    console.log('Server started on port ' + portNumber);
-});
-
-//------
+//-----
 
 uWebSocketsApp.listen(4000, token => {
     if (!token) {

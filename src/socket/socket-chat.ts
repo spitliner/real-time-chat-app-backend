@@ -21,6 +21,10 @@ const chatListener = (io: SocketServerType, socket: SocketType) => {
             console.log('channel: ' + channelID);
         }
     });
+
+    socket.on('chatRemove', (channelID: unknown) => {
+        
+    })
 };
 
 export default chatListener;
