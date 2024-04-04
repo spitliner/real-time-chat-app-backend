@@ -23,7 +23,7 @@
     "jose": "^5.1.3",
     "mongoose": "^8.0.3",
     "nanoid": "^5.0.4",
-    "snowflake": "github:spitliner/snowflake#v1.3.1",
+    "snowflake-id": "github:spitliner/snowflake-id",
     "socket.io": "^4.7.3",
     "socket.io-client": "^4.7.3",
     "typia": "^5.3.8",
