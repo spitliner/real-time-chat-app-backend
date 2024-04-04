@@ -24,7 +24,7 @@
     "nanoid": "^5.0.4",
     "snowflake-id": "github:spitliner/snowflake-id",
     "socket.io": "^4.7.3",
-    "typia": "^5.3.8",
+    "typia": "^5.5.10",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.43.0"
   },
   "devDependencies": {
