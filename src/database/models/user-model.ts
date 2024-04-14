@@ -13,6 +13,8 @@ const otpGenerate = customAlphabet(numeric, 6);
 const userModel = {
     async createUser(email: string, password: string, username: string) {
         try {
+            const friendsInit = {};
+
             const result = await userMongoModel.create({
                 id: uidGenerate(),
                 email,
@@ -60,7 +62,7 @@ const userModel = {
         }
     },
 
-    async getUserById(id: string) {
+    async getUser(id: string) {
         try {
             const query = userMongoModel.findOne({
                 id,

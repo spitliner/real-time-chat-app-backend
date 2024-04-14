@@ -5,12 +5,12 @@ import messageSchema from '../schemas/message-schema';
 const messageMongoModel = mongoose.model('Message', messageSchema, 'Messages');
 
 const messageModel = {
-    async newMessage(uid: string, cid: string, content: string) {
+    async newMessage(userId: string, channelId: string, content: string) {
         try {
             const result = await messageMongoModel.create({
                 id: Snowflake.generate(),
-                uid,
-                cid,
+                userId,
+                channelId,
                 content,
             });
 
@@ -50,10 +50,10 @@ const messageModel = {
         }
     },
 
-    async getMessageChannel(cid: string) {
+    async getChannelMessage(cid: string) {
         try {
             const query = messageMongoModel.find({
-                cid,
+                channelId: cid,
             }, '-_id -__v');
 
             const result = await query.lean().exec();
